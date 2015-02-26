@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 #   Usage:  python3 /Volumes/Python/python_tts/run_compos_class.py -n limsi_fr_tat -e -l -s colere
 #   From:   /Users/mev/Documents/_LIMSI_MEDIA/CORPUS/TATIANA
@@ -154,13 +154,13 @@ if __name__ == '__main__':
         TXT_IN_DIR = PH_DIR
         GP_OPT = GP_SYL
 
-    ## CONVERT EHMM LAB FILES
+    # **CONVERT EHMM LAB FILES**
     if args.lab_ehmm:
         process_lab_lst = [fname for fname in os.listdir(LAB_RAW_DIR) if '.lab' in fname]
         for lab_fname in process_lab_lst:
             process_ehmm_lab(lab_fname)
 
-    ## CREATE LAB FILES
+    # **CREATE LAB FILES**
     if args.lab_hts:
 
         fname_filter = ''
@@ -203,7 +203,7 @@ if __name__ == '__main__':
             except AttributeError:
                 print(lab_fname)
 
-        ## CREATE QST FILES
+        # **CREATE QST FILES**
         process_qst(process_lab_lst[0], args.style)
 
         print('')

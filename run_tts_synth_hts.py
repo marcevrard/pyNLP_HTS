@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 """
     Usage:  python3 /Volumes/Python/python_tts/run_tts_synth_hts.py -n limsi_fr_tat_10 -v
@@ -36,7 +36,7 @@ HTS_PATH = '/usr/local/HTS-2.3alpha/bin/'
 PROJECT_PATH = '~/Documents/at_LIMSI_BIG/STRAIGHT/HTS_DEMOs/HTS-demo_STRAIGHT_TAT8'
 
 
-#======================================================================================================================#
+#   ====================================================================================================================
 def debug_print(hts_lab_gen_lst, command_txt, base_fpath):
     """
     Print the HTS label file and the commands, instead of executing them.
@@ -121,7 +121,7 @@ def process_utt_synth(_utt, _txt_fpath):
     with open(_txt_fpath, 'w') as utt_f:
         print(_utt, file=utt_f)
 
-    ## FROM ClassTts
+    # **FROM ClassTts**
     # tts_obj = Tts(param_module, ph_dic='lia')                 # launch the complete TTS synthesis process FIXME
     # tts_obj.process_synthesize_hts(txt_fpath, args.style)
 
@@ -129,7 +129,7 @@ def process_utt_synth(_utt, _txt_fpath):
     utt_gp_obj.phonetize_txt_utt()
     utt_ph = utt_gp_obj.utt_ph
 
-    ## FROM RUN_COMPO
+    # **FROM RUN_COMPO**
     utt_pfs_obj = TextFeatures(param_module, utt_ph)
     utt_pfs_obj.process_pfeats()
     utt_pfs_obj.process_lab_prn()
@@ -283,7 +283,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='"python3 run_tts_synth_hts.py -n limsi_fr_guy -s calme -v -x"'
                                                  " Synthesize the given utterance.")
 
-    #-db DATABASE -u USERNAME -p PASSWORD -size 20000
+    #   -db DATABASE -u USERNAME -p PASSWORD -size 20000
     parser.add_argument('-n', '--voice_name', required=True,
                         help="Set the parameter name of the current voice.")
     parser.add_argument('-s', '--style', default='', help="Set the utterance style to synthesize.")
@@ -293,7 +293,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--debug', action='store_true', help="Set the debug mode: print commands to screen only.")
     parser.add_argument('-v', '--verbose', action='store_true', help="Set the verbose mode to hts_engine.")
     parser.add_argument('-x', '--delete', action='store_true', help="Delete previous synthesis recordings.")
-    #parser.add_argument('-l', '--onlylab', action='store_true', help="Output only lab files, no sound.")
+    #   parser.add_argument('-l', '--onlylab', action='store_true', help="Output only lab files, no sound.")
 
     args = parser.parse_args()
 
@@ -323,4 +323,4 @@ if __name__ == '__main__':
 
 
 # note: INSTALL HTS_ENGINE FOR 64bit OS: ./configure --prefix=<path_to>/hts_engine_API-1.07 CFLAGS="-m32 -g -O2 -Wall"
-#======================================================================================================================#
+#   ====================================================================================================================

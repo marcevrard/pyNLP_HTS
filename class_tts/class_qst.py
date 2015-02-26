@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 
 import importlib
@@ -36,8 +36,8 @@ class Question:
         hmm_fts_0_50_val_lst = []
         for ft in self.cst.USED_HMM_FTS_TPL:
             if (
-                    ft not in self.cst.HMM_FTS_VAL_INVENTORY_LDIC.keys()
-                and ft != 'phone' and 'prev_phone' not in ft and 'next_phone' not in ft and 'vowel' not in ft
+                    ft not in self.cst.HMM_FTS_VAL_INVENTORY_LDIC.keys() and
+                    ft != 'phone' and 'prev_phone' not in ft and 'next_phone' not in ft and 'vowel' not in ft
             ):
                 hmm_fts_0_50_val_lst.append([ft, self.cst.ZERO_TO_FIFTY])
 
@@ -66,7 +66,7 @@ class Question:
 
             for ft_class in self._fts_val_inventory_ldic.keys():		# take ft_class from the list of the ft values
                 if ft_class == ft_used.lstrip('prev_') or ft_class == ft_used.lstrip('next_'):
-                # check if ft_used belongs to ft "class" (ft_class str included in ft_used)
+                    # check if ft_used belongs to ft "class" (ft_class str included in ft_used)
                                                                     # create lst with ft names and val
                     fts_used_val_llst.append([ft_used, self._fts_val_inventory_ldic[ft_class]])
 
@@ -78,7 +78,7 @@ class Question:
         """
         # noinspection PyProtectedMember
         for ft in self.pfs_obj._USED_PFEATS_TPL:                    # self.pfs_obj._ALL_PFEATS_TPL
-        # Check all element value and set max integer val to 50
+            # Check all element value and set max integer val to 50
             val_tpl = ()
             for val in getattr(self.pfs_obj, ft):
                 if isinstance(val, int):                            # check if ft val is int

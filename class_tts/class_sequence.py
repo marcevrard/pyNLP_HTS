@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import importlib
 
@@ -181,9 +181,9 @@ class Sequence:
                 calc_el = 1
 
             if (
-                    self.item_trigger_ldic['phones'][idx] == 'pause'
-                and item != 'phrases' and item != 'sentences'           # Silence does not restart counting in these ...
-                and ref_item != 'sentences' and ref_item != 'utterance'     # ... 4 cases.
+                    self.item_trigger_ldic['phones'][idx] == 'pause' and
+                    item != 'phrases' and item != 'sentences' and       # Silence does not restart counting in these ...
+                    ref_item != 'sentences' and ref_item != 'utterance'     # ... 4 cases.
             ):
                 calc_el = 0
 
@@ -202,13 +202,13 @@ class Sequence:
         for (idx, el) in enumerate(rel_posit_tpl):
             if idx > 0:
                 if (
-                        self.item_trigger_ldic[ref_item][idx] == 'start'
-                    or (
+                        self.item_trigger_ldic[ref_item][idx] == 'start' or
+                        (
                         self.item_trigger_ldic['phones'][idx] == 'pause'
                         and item != 'phrases' and item != 'sentences'
                         and ref_item != 'sentences' and ref_item != 'utterance'
-                    )
-                    or idx == len(rel_posit_tpl) - 1                            # when the end of the list is reached
+                        ) or
+                        idx == len(rel_posit_tpl) - 1                            # when the end of the list is reached
                 ):
                     calc_sum = rel_posit_tpl[idx-1]
                     if idx == len(rel_posit_tpl) - 1:
@@ -219,9 +219,9 @@ class Sequence:
                     rel_numb_lst[idx_bkp:idx] = [calc_sum] * (idx - idx_bkp)
 
                     if (
-                            self.item_trigger_ldic['phones'][-1] == 'pause'
-                        and item != 'phrases' and item != 'sentences'
-                        and ref_item != 'sentences' and ref_item != 'utterance'
+                            self.item_trigger_ldic['phones'][-1] == 'pause' and
+                            item != 'phrases' and item != 'sentences' and
+                            ref_item != 'sentences' and ref_item != 'utterance'
                     ):
                         rel_numb_lst[-1] = 0
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import sys
 import os.path
 
-import my_defs.defs_list as Lst
+import my_defs.defs_list as lst
 
 
 #   ====================================================================================================================
@@ -21,7 +21,7 @@ GP_OPT_SYLL_LIA = '-s hj -f'
 GP_OPTION_SAMPA = '-s abcdefhk -f'
 GP_OPT_SYLL_SAMPA = '-s hk -f'
 _POS_FPATH = os.path.join(CONF_PATH, 'pos_labels.txt')
-POS_LABELS = Lst.conv_csv_to_ntpl(_POS_FPATH, 'PosLabelsTpl', delimit='\t')
+POS_LABELS = lst.conv_csv_to_ntpl(_POS_FPATH, 'PosLabelsTpl', delimit='\t')
 PUNCT = ',.!?'                                                          # All punctuations
 PUNCT_END = '.!?...'                                                    # End of sentence punctuations
 PUNCT_PHRASE = ',)(;:'                                                  # End of phrase punctuations
@@ -45,21 +45,21 @@ _USED_HMM_FTS_FPATH = os.path.join(CONF_PATH, 'used_hmm_features.txt')
 _ALL_HMM_FTS_FPATH = os.path.join(CONF_PATH, 'all_hmm_features.txt')
 _UTT_HMM_FTS_FPATH = os.path.join(CONF_PATH, 'utt_hmm_features.txt')
 
-PH_FTS_TPL = Lst.conv_csv_to_ttpl(_PH_FTS_FPATH)
-USED_HMM_FTS_TPL = Lst.conv_csv_to_ttpl(_USED_HMM_FTS_FPATH)
-UTT_HMM_FTS_TPL = Lst.conv_csv_to_ttpl(_UTT_HMM_FTS_FPATH)
+PH_FTS_TPL = lst.conv_csv_to_ttpl(_PH_FTS_FPATH)
+USED_HMM_FTS_TPL = lst.conv_csv_to_ttpl(_USED_HMM_FTS_FPATH)
+UTT_HMM_FTS_TPL = lst.conv_csv_to_ttpl(_UTT_HMM_FTS_FPATH)
 
 # Put phone on top of USED_FTS_TPL
 USED_FTS_TPL = (PHONE,) + tuple([name for name in sorted(PH_FTS_TPL + USED_HMM_FTS_TPL)
                                  if name != PHONE])
 
-HMM_FTS_VAL_INVENTORY_LDIC = Lst.conv_csv_to_ldic(_HMM_FTS_VAL_INVENTORY_FPATH, delimit='\t')
-ALL_HMM_FTS_TPL = tuple(Lst.conv_csv_to_ttpl(_ALL_HMM_FTS_FPATH))
+HMM_FTS_VAL_INVENTORY_LDIC = lst.conv_csv_to_ldic(_HMM_FTS_VAL_INVENTORY_FPATH, delimit='\t')
+ALL_HMM_FTS_TPL = tuple(lst.conv_csv_to_ttpl(_ALL_HMM_FTS_FPATH))
 
 ZERO_TO_FIFTY = [str(i) for i in range(51)]					        # Default hmm fts values 0..19
 
 _IPA_CONV_FPATH = os.path.join(CONF_PATH, 't_LPA_LIA.txt')
-IPA_CONV_DIC = Lst.conv_csv_to_ldic(_IPA_CONV_FPATH, delimit='\t')
+IPA_CONV_DIC = lst.conv_csv_to_ldic(_IPA_CONV_FPATH, delimit='\t')
 
 if sys.platform.startswith('darwin'):
     _GP_PATH = '/Volumes/Projet/TTS/gp_bin/src/'							# MAC OS X 10.7 mev
@@ -71,26 +71,26 @@ else:
 GP_F_PATH = os.path.join(_GP_PATH, _GP_FNAME)
 
 _PROSO_LABEL_FPATH = os.path.join(CONF_PATH, 'tobi_fr.txt')
-PROSO_LABEL = Lst.conv_csv_to_ldic(_PROSO_LABEL_FPATH, '\t')
+PROSO_LABEL = lst.conv_csv_to_ldic(_PROSO_LABEL_FPATH, '\t')
 
 
-#======================================================================================================================#
+#   ====================================================================================================================
 # TTS Training constants
 
-#MAIN_PATH = os.path.expanduser('~/Documents/_LIMSI_MEDIA/CORPUS/Corpus_FT/guy_triste')
-#put in main
+#   MAIN_PATH = os.path.expanduser('~/Documents/_LIMSI_MEDIA/CORPUS/Corpus_FT/guy_triste')
+# TODO: put in main
 _IMPORT_LAB_FPATH = os.path.join(CONF_PATH, 'import_lab_fields.txt')
-IMPORT_LAB_FIELDS = Lst.conv_csv_to_ttpl(_IMPORT_LAB_FPATH)
+IMPORT_LAB_FIELDS = lst.conv_csv_to_ttpl(_IMPORT_LAB_FPATH)
 
 
-#======================================================================================================================#
+#   ====================================================================================================================
 # TTS Synthesis constants
 
 TXT_FPATH = os.path.join(PYTTS_PATH, 'utt.txt')                         # Raw text to synthezise file path
 UTT_FPATH = os.path.join(PYTTS_PATH, 'utt_ph.txt')                      # Phonetized text file path
 
 
-#======================================================================================================================#
+#   ====================================================================================================================
 # TTS MARY Synthesis constants
 
 _MARY_PATH = os.path.expanduser('~/marytts-clone/')
@@ -114,7 +114,7 @@ XML_CONT_PH = '" pos="content"/>'
 XML_FUNC_PH = '" pos="function"/>'
 
 
-#======================================================================================================================#
+#   ====================================================================================================================
 # eHMM
 
 EHMM_PATH = os.path.join(PARAM_PATH, 'ehmm_files')
@@ -122,8 +122,8 @@ EHMM_CONF_FPATH = os.path.join(EHMM_PATH, 'ehmm.featSettings')
 ALIGN_FNAME = 'ehmm.align'
 
 
-#======================================================================================================================#
+#   ====================================================================================================================
 # SPS file converter
 
 _SPS_FIELDS_FPATH = os.path.join(CONF_PATH, 'fields_sps.txt')
-SPS_FIELDS_LST = Lst.conv_txt_to_lst(_SPS_FIELDS_FPATH)
+SPS_FIELDS_LST = lst.conv_txt_to_lst(_SPS_FIELDS_FPATH)
