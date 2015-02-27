@@ -189,10 +189,10 @@ def process_interactive_synth():
                     pass
 
                 idx = 0
-                base_fpath = base_gen_fpath + '_{:04d}'.format(idx)
+                base_fpath = '{base_path}_{:04d}'.format(base_path=base_gen_fpath, idx)
                 while os.path.isfile(base_fpath + '.wav'):                  # iterate file names to keep history
                     idx += 1
-                    base_fpath = base_gen_fpath + '_{:04d}'.format(idx)
+                    base_fpath = '{base_path}_{:04d}'.format(base_path=base_gen_fpath, idx)
 
                 if args.verbose:                                            # if verbose mode on > print utt_txt to file
                     with open(base_fpath+'.txt', 'w') as f_txt:
@@ -241,9 +241,9 @@ def process_recursive_synth(proc_path):
         misc.progress_bar(i_proc, len(process_utt_lst))
 
         if args.style != '':
-            base_fpath = base_gen_fpath + '_' + args.style + '_{:04d}'.format(i_proc)
+            base_fpath = '{base_path}_{style}_{:04d}'.format(base_path=base_gen_fpath, style=args.style, i_proc)
         else:
-            base_fpath = base_gen_fpath + '_{:04d}'.format(i_proc)
+            base_fpath = '{base_path}_{:04d}'.format(base_path=base_gen_fpath, i_proc)
         txt_fpath = base_fpath + '.txt'
 
         utt_pfs_obj = process_utt_synth(utt, txt_fpath)
