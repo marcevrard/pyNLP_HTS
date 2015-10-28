@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import importlib
 
@@ -42,8 +42,9 @@ class Phone(Item):
         self.ph_set_obj = PhoneSet(param_module, self.cst.PH_SET_FPATH)
         self.ph_set_obj.set_current_ph(ph)
 
-        # self.ph_set_obj = ph_set_obj(self.ph)       # TODO: Manage the problem of object transmission (aggregation)
-                                                    # TODO... maybe structure to improve (Phone part of PhoneSet?)
+        # self.ph_set_obj = ph_set_obj(self.ph)
+        # TODO: Manage the problem of object transmission (aggregation)
+        # TODO... maybe structure to improve (Phone part of PhoneSet?)
 
         # self._ph_pfs = {}
     # def set_ph_pfs(self):     # QQ: Should I process the ph_set here and include the class_tts_extr here (aggreg.)?
@@ -73,7 +74,7 @@ class Syllable(Item):
                     self.cst.SSIL for ph in _ph_lst]
 
         self.phs = [Phone(param_module, ph, idx_ph, len(_phs_lst)) for (idx_ph, ph) in enumerate(_phs_lst)]
-                                                                                    # punct marks > pauses
+        # punct marks > pauses
 
         self.vowels = [ph.ph for ph in self.phs if ph.ph_set_obj.vc == '+']         # TODO: warning see (1)
 

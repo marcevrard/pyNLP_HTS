@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-    Usage:  python3 /Volumes/Python/python_tts/run_tts_synth_hts.py -n limsi_fr_tat_10 -v
-    Usage:  python3 /Volumes/Python/python_tts/run_tts_synth_hts.py -n limsi_fr_tat_10 -r
-                    [~/Documents/at_LIMSI_BIG/CORPUS/VOCALLY/limsi_fr_jlc_2/txt_testing_corpus] (default: pwd)
+    Usage:  python3 /Volumes/Python/python_tts/run_tts_synth_hts.py -p ~/Desktop/DEMO_VOICE/HTS_PROD/limsi_fr_tat_10 -v
+    Usage:  python3 /Volumes/Python/python_tts/run_tts_synth_hts.py -p ~/Desktop/DEMO_VOICE/HTS_PROD/limsi_fr_tat_10 -r
+                    [~/Documents/at_LIMSI_BIG/CORPUS/VOCALLY/limsi_fr_jlc_2/txt_testing_corpus]
 """
 
 import sys
@@ -25,15 +25,15 @@ from class_tts import TextFeatures
 PARAM_BASE_LST = ['param_dir.', '.tts_const']                               # Because modules cannot be called by path
 THIS_PATH = os.path.dirname(__file__)                                       # Path of the current script
 
-HTS_PROD_PATH = os.path.expanduser('~/Desktop/DEMO_VOICE/HTS_PROD')
+# HTS_PROD_PATH = os.path.expanduser('~/Desktop/DEMO_VOICE/HTS_PROD')
 
 if sys.platform.startswith('linux'):
     WAV_PLAY = 'aplay'
 else:
     WAV_PLAY = 'afplay'
 
-HTS_PATH = '/usr/local/HTS-2.3alpha/bin/'
-PROJECT_PATH = '~/Documents/at_LIMSI_BIG/STRAIGHT/HTS_DEMOs/HTS-demo_STRAIGHT_TAT8'
+# HTS_PATH = '/usr/local/HTS-2.3beta/bin/'
+# PROJECT_PATH = '~/Documents/at_LIMSI_BIG/STRAIGHT/HTS_DEMOs/HTS-demo_STRAIGHT_TAT8'
 
 
 #   ====================================================================================================================
@@ -84,34 +84,35 @@ def run_hts_eng_synth(hts_lab_gen_prn, base_fpath):
             subprocess.call(WAV_PLAY + ' ' + base_fpath + '.wav', shell=True)   # play the wav output
 
 
-def run_hts_htk_synth(hts_lab_gen_prn, base_fpath):
-    """
-    Run the HTS and read the output wav files.
-    """
-    with open(utt_gen_lab_fpath, 'w') as utt_gen_f:                         # Print utt_gen to file
-        for l in hts_lab_gen_prn:
-            print(l, file=utt_gen_f)
-
-    mix = '1mix'
-    hts_2mix_make_unseen_mod_command = (
-        os.path.join(HTS_PATH, 'HHEd') + ' -A -B -C ' +
-        os.path.join(PROJECT_PATH, 'configs/qst001/ver1/trn.cnf') + ' -D -T 1 -p -i -H ' +
-        os.path.join(PROJECT_PATH, 'models/qst001/ver1/cmp/re_clustered.mmf.'+mix) + ' -w ' +
-        os.path.join(PROJECT_PATH, 'models/qst001/ver1/cmp/re_clustered_all.mmf.'+mix) + ' ' +
-        os.path.join(PROJECT_PATH, 'edfiles/qst001/ver1/cmp/mku.hed') + ' ' +
-        os.path.join(PROJECT_PATH, 'data/lists/full.list')
-    )
-    shutil.copyfile(utt_gen_lab_fpath, base_fpath+'.lab')
-
-    # if args.debug:
-    #     debug_print(hts_lab_gen_prn, hts_htk_command, base_fpath)
-    #
-    # else:
-    #     os.system(hts_htk_command)                                          # call the hts_engine API
-    #
-    #     if not args.process_path:                                           # avoid playing if recursive synthesis
-    #
-    #         os.system(WAV_PLAY + ' ' + base_fpath + '.wav')             # play the wav output
+# TODO: use pyHTS library
+# def run_hts_htk_synth(hts_lab_gen_prn, base_fpath):
+#     """
+#     Run the HTS synth and read the output wav files.
+#     """
+#     with open(utt_gen_lab_fpath, 'w') as utt_gen_f:                         # Print utt_gen to file
+#         for l in hts_lab_gen_prn:
+#             print(l, file=utt_gen_f)
+#
+#     mix = '1mix'
+#     hts_2mix_make_unseen_mod_command = (
+#         os.path.join(HTS_PATH, 'HHEd') + ' -A -B -C ' +
+#         os.path.join(PROJECT_PATH, 'configs/qst001/ver1/trn.cnf') + ' -D -T 1 -p -i -H ' +
+#         os.path.join(PROJECT_PATH, 'models/qst001/ver1/cmp/re_clustered.mmf.'+mix) + ' -w ' +
+#         os.path.join(PROJECT_PATH, 'models/qst001/ver1/cmp/re_clustered_all.mmf.'+mix) + ' ' +
+#         os.path.join(PROJECT_PATH, 'edfiles/qst001/ver1/cmp/mku.hed') + ' ' +
+#         os.path.join(PROJECT_PATH, 'data/lists/full.list')
+#     )
+#     shutil.copyfile(utt_gen_lab_fpath, base_fpath+'.lab')
+#
+#     # if args.debug:
+#     #     debug_print(hts_lab_gen_prn, hts_htk_command, base_fpath)
+#     #
+#     # else:
+#     #     os.system(hts_htk_command)                                          # call the hts_engine API
+#     #
+#     #     if not args.process_path:                                           # avoid playing if recursive synthesis
+#     #
+#     #         os.system(WAV_PLAY + ' ' + base_fpath + '.wav')             # play the wav output
 
 
 def process_utt_synth(_utt, _txt_fpath):
@@ -284,11 +285,12 @@ if __name__ == '__main__':
                                                  " Synthesize the given utterance.")
 
     #   -db DATABASE -u USERNAME -p PASSWORD -size 20000
-    parser.add_argument('-n', '--voice_name', required=True,
-                        help="Set the parameter name of the current voice.")
+    parser.add_argument('-p', '--voice_path', required=True,
+                        help="Give path of the current voice.")
     parser.add_argument('-s', '--style', default='', help="Set the utterance style to synthesize.")
     parser.add_argument('-c', '--speed_rate', default='1.0', help="Set speech rate.")
-    parser.add_argument('-r', '--recursive', nargs='?', const=os.getcwd(), dest='process_path',
+    parser.add_argument('-r', '--recursive',  # nargs='?', const=os.getcwd(),
+                        dest='process_path',
                         help="Recursively process lines from corpus text file, given as file path.")
     parser.add_argument('-d', '--debug', action='store_true', help="Set the debug mode: print commands to screen only.")
     parser.add_argument('-v', '--verbose', action='store_true', help="Set the verbose mode to hts_engine.")
@@ -297,25 +299,25 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    voice_name_lst = args.voice_name.split('_')                         # Parse voice name with '_'
-    param_name = '_'.join(voice_name_lst[0:3])                          # Param name is the root voice name
+    voice_name = os.path.basename(os.path.normpath(args.voice_path))        # Get voice dir name
+    voice_name_lst = voice_name.split('_')                                  # Parse voice name with '_'
+    param_name = '_'.join(voice_name_lst[0:3])                              # Param name is the root voice name
 
     param_module = PARAM_BASE_LST[0] + param_name + PARAM_BASE_LST[1]
     # print(param_module)     # debug
     cst = importlib.import_module(param_module)
 
     voice_fname = param_name + '.htsvoice'                              # Voice filename is based on the root voice name
-    voice_dir = args.voice_name + '_voice'
-    voice_relpath = os.path.join(voice_dir, 'qst001/ver1')
+    voices_dir = 'voices'
 
-    voice_fpath = os.path.join(HTS_PROD_PATH, voice_relpath, voice_fname)
-    base_gen_fname = args.voice_name + '_gen'
-    gen_dir = args.voice_name + '_prod'
-    base_gen_path = os.path.join(HTS_PROD_PATH, gen_dir)
+    voice_fpath = os.path.join(args.voice_path, voices_dir, voice_fname)
+    base_gen_fname = voice_name + '_gen'
+    gen_dir = 'synth'
+    base_gen_path = os.path.join(args.voice_path, gen_dir)
     base_gen_fpath = os.path.join(base_gen_path, base_gen_fname)
 
     utt_gen_lab_fname = '.' + base_gen_fname + '_tmp.lab'
-    utt_gen_lab_fpath = os.path.join(HTS_PROD_PATH, utt_gen_lab_fname)
+    utt_gen_lab_fpath = os.path.join(args.voice_path, gen_dir, utt_gen_lab_fname)
 
     print("\nThe style {} is chosen for synthesis.\n".format(args.style))
 

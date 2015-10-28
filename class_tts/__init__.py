@@ -2,8 +2,7 @@
 #-*- encoding: utf-8 -*-
 
 from .class_tts_gp import Gp
-from .class_tts_extractor import PfsExtractor
-from .class_extr_hts import PfsExtractorHts
+from class_tts.Archives.MaybeNeeded.class_tts_extractor import PfsExtractor
 
 from .class_ph_set import PhoneSet
 from .class_items import Item, Utterance, Sentence, Phrase, Word, Syllable, Phone
