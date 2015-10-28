@@ -62,7 +62,7 @@ _IPA_CONV_FPATH = os.path.join(CONF_PATH, 't_LPA_LIA.txt')
 IPA_CONV_DIC = lst.conv_csv_to_ldic(_IPA_CONV_FPATH, delimit='\t')
 
 if sys.platform.startswith('darwin'):
-    _GP_PATH = '/Volumes/Projet/TTS/gp_bin/src/'							# MAC OS X 10.7 mev
+    _GP_PATH = os.path.expanduser('/Volumes/Projet/TTS/gp_bin/src/')							# MAC OS X 10.7 mev
 elif sys.platform.startswith('linux'):
     _GP_PATH = os.path.expanduser('~/GP/gp_bin/src/')			# Ubuntu LST 12.04 mev
 else:

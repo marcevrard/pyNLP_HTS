@@ -281,8 +281,11 @@ def main():
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='"python3 run_tts_synth_hts.py -n limsi_fr_guy -s calme -v -x"'
-                                                 " Synthesize the given utterance.")
+    parser = argparse.ArgumentParser(description="""
+    For example:
+    'python3 /Volumes/Python/python_tts/run_tts_synth_hts.py -p ~/Desktop/DEMO_VOICE/HTS_PROD/limsi_fr_tat_10 -v'
+    synthesizes the given utterance.
+    """)
 
     #   -db DATABASE -u USERNAME -p PASSWORD -size 20000
     parser.add_argument('-p', '--voice_path', required=True,
